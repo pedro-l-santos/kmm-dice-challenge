@@ -1,11 +1,11 @@
 import SwiftUI
 import shared
 
-struct ContentView: View {
+struct DiceView: View {
     @State
     var numFaces = 4
     @State
-    var diceValue = Greeting().greeting(numFaces: 4)
+    var diceValue = DiceManager().rollDice(numFaces: 4)
 
 	var body: some View {
             VStack{
@@ -44,12 +44,12 @@ struct ContentView: View {
                 }
                 .foregroundColor(.white)
                 .padding(.all, 30)
-                .frame(maxWidth: .infinity - 1000)
+                .frame(maxWidth: .infinity)
                 .background(Color.white.opacity(0.2))
                 .cornerRadius(20)
                 Spacer()
                 Button (action:{
-                    diceValue = Greeting().greeting(numFaces: Int32(numFaces))
+                    diceValue = DiceManager().rollDice(numFaces: Int32(numFaces))
                 }){
                     Text("Roll the Dice")
                         .foregroundColor(.black)
@@ -63,8 +63,8 @@ struct ContentView: View {
 	}
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct DiceView_Previews: PreviewProvider {
 	static var previews: some View {
-		ContentView()
+        DiceView()
 	}
 }
