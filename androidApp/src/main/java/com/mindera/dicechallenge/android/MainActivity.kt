@@ -6,7 +6,7 @@ import com.mindera.dicechallenge.Greeting
 import android.widget.TextView
 
 fun greet(): String {
-    return Greeting().greeting()
+    return Greeting().greeting(5).toString()
 }
 
 class MainActivity : AppCompatActivity() {
