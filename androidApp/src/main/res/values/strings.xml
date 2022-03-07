@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dice_roller">Dice Roller</string>
+    <string name="dice">Dice</string>
+    <string name="roll_the_dice">Roll the dice</string>
+    <string name="number_of_faces">Number of faces</string>
+    <string name="dice_value">Dice Value:</string>
+</resources>

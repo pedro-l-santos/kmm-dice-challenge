@@ -4,17 +4,36 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.mindera.dicechallenge.Greeting
 import android.widget.TextView
+import com.mindera.dicechallenge.DiceManager
+import com.mindera.dicechallenge.android.databinding.ActivityMainBinding
+import java.lang.NumberFormatException
 
-fun greet(): String {
-    return Greeting().greeting(5).toString()
-}
+fun rollDice(numFaces: Int): Int = DiceManager().rollDice(numFaces)
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        val tv: TextView = findViewById(R.id.text_view)
-        tv.text = greet()
+        setupRollButton()
+    }
+
+    private fun setupRollButton() {
+        binding.btnRoll.setOnClickListener {
+            val numFaces: Int
+            try {
+                numFaces = binding.textFieldNumFaces.editText?.text.toString().toInt()
+            } catch (e: NumberFormatException) {
+                return@setOnClickListener
+            }
+            if (numFaces < 1) { return@setOnClickListener }
+            val value = rollDice(numFaces)
+            binding.tvResult.text = value.toString()
+        }
     }
 }
