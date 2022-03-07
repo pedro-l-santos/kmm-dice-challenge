@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)"
+options: "d0561f6d5defd870b44ab8120707f93c2c2108251540a9d1cc8f21a4aa2eda47"
+build_start_time: [1646657606, 323508024]
+build_end_time: [1646657607, 357295989]
+inputs:
+  "/Users/kyber/Mindera/Projects/DiceChallenge/iosApp/iosApp/ContentView.swift": !private [1646657437, 701601982]
+  "/Users/kyber/Mindera/Projects/DiceChallenge/iosApp/iosApp/iOSApp.swift": [1646657437, 703280210]
