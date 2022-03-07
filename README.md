@@ -1,1 +1,1 @@
-# kmm-dice-challenge
+# KMM Dice Roller Challenge
