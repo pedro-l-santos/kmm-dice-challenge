@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 data class RandomIntResponseRandom(
     val completionTime: String,
     @SerialName("data")
-    val data: List<Int>
+    val numbers: List<Int>
 )
