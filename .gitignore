@@ -14,3 +14,6 @@ ios.xcworkspace/
 
 .DS_Store
 .externalNativeBuild
+*.xcuserstate
+iosApp/iosApp.xcworkspace/xcuserdata/kyber.xcuserdatad/UserInterfaceState.xcuserstate
+iosApp/iosApp.xcworkspace/xcuserdata/kyber.xcuserdatad/UserInterfaceState.xcuserstate

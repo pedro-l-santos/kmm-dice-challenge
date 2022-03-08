@@ -25,9 +25,9 @@ kotlin {
     
     sourceSets {
         val ktorVersion = "1.6.7"
+
         val commonMain by getting{
             dependencies{
-                //implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
                 implementation ("io.ktor:ktor-client-serialization:$ktorVersion")
             }
         }
