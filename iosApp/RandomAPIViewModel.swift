@@ -10,14 +10,22 @@ import Foundation
 import shared
 
 final class RandomAPIViewModel: ObservableObject {
-    @Published var data = "Loading..."
+    
+    @Published var num = "1"
+    @Published var lowerBound = "1"
+    @Published var upperBound = "100"
+    
+    @Published var resultList: [Int] = []
+    @Published var isError = false
     
     private let kmmRandomRepo = RandomRepository()
     
-    func load(){
-        kmmRandomRepo.generateRandomInteger(num: 1,lowerBound: 1,upperBound: 6){value,_ in
-            if let value = value {
-                self.data = String(Int(truncating: value[0]))
+    func generateValues(){
+        if let unwrappedNum = Int32(num), let unwrappedLower = Int32(lowerBound), let unwrappedUpperBound = Int32(upperBound) {
+            kmmRandomRepo.generateRandomInteger(num: unwrappedNum, lowerBound: unwrappedLower, upperBound: unwrappedUpperBound){value,_ in
+                if let value = value {
+                    self.resultList = value.map{Int(truncating: $0)}
+                }
             }
         }
     }
