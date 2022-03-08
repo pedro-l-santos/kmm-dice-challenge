@@ -13,9 +13,16 @@ final class DiceViewModel: ObservableObject {
     @Published
     var numFaces = 4
     @Published
-    var diceValue = DiceManager().rollDice(numFaces: 4)
+    var diceValue = 0
+    
+    // KMM RandomAPI Repo
+    private let kmmRandomRepo = RandomRepository()
     
     func rollDice(){
-        diceValue = DiceManager().rollDice(numFaces: Int32(numFaces))
+        kmmRandomRepo.rollDice(numFaces: Int32(numFaces)){value,_ in
+            if let value = value {
+                self.diceValue = Int(truncating: value)
+            }
+        }
     }
 }

@@ -12,14 +12,12 @@ import shared
 final class RandomAPIViewModel: ObservableObject {
     @Published var data = "Loading..."
     
-    let kmmRandomAPI = RandomAPI()
+    private let kmmRandomRepo = RandomRepository()
     
     func load(){
-        kmmRandomAPI.getData(){ result, error in
-            if let result = result {
-                self.data = result
-            } else{
-                self.data = "Error: \(String(describing: error))"
+        kmmRandomRepo.generateRandomInteger(num: 1,lowerBound: 1,upperBound: 6){value,_ in
+            if let value = value {
+                self.data = String(Int(truncating: value[0]))
             }
         }
     }
