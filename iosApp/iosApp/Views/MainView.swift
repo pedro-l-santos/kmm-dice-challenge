@@ -9,7 +9,7 @@ struct MainView: View {
                 .tabItem{
                     Label("Dice", systemImage: "dice")
                 }
-            APIView()
+            RandomAPIView()
                 .tabItem{
                     Label("API", systemImage: "house")
                 }

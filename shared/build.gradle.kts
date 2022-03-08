@@ -23,8 +23,13 @@ kotlin {
     }
     
     sourceSets {
-        val ktorVersion = "1.5.4"
-        val commonMain by getting
+        val ktorVersion = "1.6.7"
+        val commonMain by getting{
+            dependencies{
+                //implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+                implementation ("io.ktor:ktor-client-serialization:$ktorVersion")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
@@ -44,6 +49,9 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
+            dependencies{
+                implementation("io.ktor:ktor-client-ios:$ktorVersion")
+            }
         }
         val iosX64Test by getting
         val iosArm64Test by getting
