@@ -2,10 +2,7 @@ import SwiftUI
 import shared
 
 struct DiceView: View {
-    @State
-    var numFaces = 4
-    @State
-    var diceValue = DiceManager().rollDice(numFaces: 4)
+    @StateObject private var viewModel = DiceViewModel()
 
 	var body: some View {
             VStack{
@@ -24,7 +21,7 @@ struct DiceView: View {
                     Text("Number of Faces:")
                         .foregroundColor(.white)
                     Spacer()
-                    Picker(selection: $numFaces, label: Text("Number of Faces")){
+                    Picker(selection: $viewModel.numFaces, label: Text("Number of Faces")){
                         Text("4").tag(4)
                         Text("6").tag(6)
                         Text("8").tag(8)
@@ -39,7 +36,7 @@ struct DiceView: View {
                 Spacer()
                 HStack{
                     Image(systemName: "dice")
-                    Text("Dice Value: \(diceValue)")
+                    Text("Dice Value: \(viewModel.diceValue)")
                     Image(systemName: "dice")
                 }
                 .foregroundColor(.white)
@@ -49,7 +46,7 @@ struct DiceView: View {
                 .cornerRadius(20)
                 Spacer()
                 Button (action:{
-                    diceValue = DiceManager().rollDice(numFaces: Int32(numFaces))
+                    viewModel.rollDice()
                 }){
                     Text("Roll the Dice")
                         .foregroundColor(.black)
