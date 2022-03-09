@@ -5,14 +5,20 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import com.mindera.dicechallenge.android.R
 import com.mindera.dicechallenge.android.databinding.ActivityMainBinding
+import com.mindera.dicechallenge.repository.RandomRepository
+import kotlinx.coroutines.flow.collect
 
 private val FIELD_ITEMS = listOf("4", "6", "8", "10", "12", "20", "100")
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels {
+        MainViewModelFactory(RandomRepository()) // TODO: Apply DI
+    }
 
     private lateinit var binding: ActivityMainBinding
 
@@ -37,8 +43,22 @@ class MainActivity : AppCompatActivity() {
     private fun setupRollButton() {
         binding.btnRoll.setOnClickListener {
             val numFaces = binding.textFieldNumFaces.editText?.text.toString().toInt()
-            val value = viewModel.rollDice(numFaces)
-            binding.tvResult.text = value.toString()
+            viewModel.rollDice(numFaces)
+            /*val value = viewModel.rollDice(numFaces)
+            binding.tvResult.text = value.toString()*/
+        }
+        lifecycleScope.launchWhenCreated {
+            viewModel.diceValue.collect {
+                if (it == ERROR_VALUE) {
+                    Snackbar.make(
+                        binding.btnRoll,
+                        getString(R.string.error_dice_value),
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                } else if (it > INITIAL_VALUE) {
+                    binding.tvResult.text = it.toString()
+                }
+            }
         }
     }
 }
