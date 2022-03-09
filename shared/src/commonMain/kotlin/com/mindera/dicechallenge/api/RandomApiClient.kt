@@ -18,7 +18,7 @@ private const val REQ_BODY_ID = 1
 private const val REQ_BODY_JPC = "2.0"
 private const val REQ_BODY_METHOD = "generateIntegers"
 
-class RandomAPI {
+class RandomApiClient : RandomApi {
 
     private val httpClient = HttpClient(){
         install(JsonFeature){
@@ -30,17 +30,17 @@ class RandomAPI {
         }
     }
 
-    suspend fun generateInteger(num: Int, lowerBound: Int, upperBound: Int): List<Int> {
-        try {
+    override suspend fun generateInteger(num: Int, lowerBound: Int, upperBound: Int): List<Int> {
+        return try {
             val response: RandomIntResponse = httpClient.post(RANDOM_ENDPOINT){
                 contentType(ContentType.Application.Json)
                 body = RandomIntRequest(REQ_BODY_ID, REQ_BODY_JPC, REQ_BODY_METHOD,
                     RandomIntRequestParams(API_KEY, upperBound, lowerBound, num))
             }
-            return response.result.random.numbers
+            response.result.random.numbers
         } catch (e: Exception){
             println(e.message)
-            return listOf(-1)
+            listOf(-1)
         }
     }
 }
