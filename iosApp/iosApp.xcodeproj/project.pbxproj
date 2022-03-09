@@ -67,9 +67,9 @@
 		1E429D3F27D63B9B007A5F8C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1E99A0D627D68C02000815F1 /* RandomAPIView.swift */,
 				7555FF82242A565900829871 /* DiceView.swift */,
 				1E99A0D427D689E3000815F1 /* MainView.swift */,
-				1E99A0D627D68C02000815F1 /* RandomAPIView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

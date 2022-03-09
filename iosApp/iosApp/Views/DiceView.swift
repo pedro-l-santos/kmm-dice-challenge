@@ -57,6 +57,9 @@ struct DiceView: View {
                 Spacer()
             }
             .background(Color(red: 30/255, green: 30/255, blue: 30/255)).ignoresSafeArea()
+            .alert(isPresented: $viewModel.isError) {
+                Alert(title: Text("Error in retriving the value."))
+            }
 	}
 }
 

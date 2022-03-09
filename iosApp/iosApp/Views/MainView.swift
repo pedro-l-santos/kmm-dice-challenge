@@ -11,7 +11,7 @@ struct MainView: View {
                 }
             RandomAPIView()
                 .tabItem{
-                    Label("API", systemImage: "house")
+                    Label("Random", systemImage: "network")
                 }
                 .background(Color(red: 30/255, green: 30/255, blue: 30/255)).ignoresSafeArea()
         }
