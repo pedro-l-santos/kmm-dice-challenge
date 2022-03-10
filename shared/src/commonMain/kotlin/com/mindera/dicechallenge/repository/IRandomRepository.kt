@@ -1,5 +1,7 @@
 package com.mindera.dicechallenge.repository
 
+const val ERROR_VALUE = -1
+
 interface IRandomRepository {
 
     suspend fun rollDice(numFaces: Int): Int

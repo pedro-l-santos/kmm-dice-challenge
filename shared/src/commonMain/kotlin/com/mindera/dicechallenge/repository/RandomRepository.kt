@@ -13,6 +13,9 @@ class RandomRepository : IRandomRepository, KoinComponent {
     private val api : RandomApi by inject()
 
     override suspend fun rollDice(numFaces: Int): Int {
+        if (numFaces < 1) {
+            return ERROR_VALUE
+        }
         return api.generateInteger(DICE_NUM, DICE_LOWER_BOUND, numFaces)[0]
     }
 
