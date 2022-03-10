@@ -4,6 +4,7 @@ import com.mindera.dicechallenge.api.model.RandomIntRequest
 import com.mindera.dicechallenge.api.model.RandomIntRequestParams
 import com.mindera.dicechallenge.api.model.RandomIntResponse
 import io.ktor.client.*
+import io.ktor.client.engine.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.request.*
@@ -18,9 +19,9 @@ private const val REQ_BODY_ID = 1
 private const val REQ_BODY_JPC = "2.0"
 private const val REQ_BODY_METHOD = "generateIntegers"
 
-class RandomApiClient : RandomApi {
+class RandomApiClient(engine: HttpClientEngine) : RandomApi {
 
-    private val httpClient = HttpClient(){
+    private val httpClient = HttpClient(engine){
         install(JsonFeature){
             val json = kotlinx.serialization.json.Json {
                 ignoreUnknownKeys = true
