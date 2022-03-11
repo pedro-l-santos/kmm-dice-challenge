@@ -1,6 +1,6 @@
 package com.mindera.dicechallenge.di
 
-import com.mindera.dicechallenge.api.RandomApi
+import com.mindera.dicechallenge.api.IRandomApiClient
 import com.mindera.dicechallenge.api.RandomApiClient
 import com.mindera.dicechallenge.repository.IRandomRepository
 import com.mindera.dicechallenge.repository.RandomRepository
@@ -19,5 +19,5 @@ fun initKoin() = initKoin {}
 
 val commonModule = module {
     single<IRandomRepository> { RandomRepository() }
-    single<RandomApi> { RandomApiClient() }
+    single<IRandomApiClient> { RandomApiClient() }
 }

@@ -18,7 +18,7 @@ private const val REQ_BODY_ID = 1
 private const val REQ_BODY_JPC = "2.0"
 private const val REQ_BODY_METHOD = "generateIntegers"
 
-class RandomApiClient : RandomApi {
+class RandomApiClient : IRandomApiClient {
 
     private val httpClient = HttpClient(){
         install(JsonFeature){
@@ -40,7 +40,7 @@ class RandomApiClient : RandomApi {
             response.result.random.numbers
         } catch (e: Exception){
             println(e.message)
-            listOf(-1)
+            listOf()
         }
     }
 }

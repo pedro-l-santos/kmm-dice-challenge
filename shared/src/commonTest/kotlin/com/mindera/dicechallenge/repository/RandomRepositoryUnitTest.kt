@@ -1,6 +1,6 @@
 package com.mindera.dicechallenge.repository
 
-import com.mindera.dicechallenge.api.RandomApi
+import com.mindera.dicechallenge.api.IRandomApiClient
 import com.mindera.dicechallenge.mocks.MockRandomApi
 import kotlinx.coroutines.runBlocking
 import org.koin.core.context.startKoin
@@ -22,7 +22,7 @@ class RandomRepositoryUnitTest : KoinTest {
     fun setup() {
         startKoin {
             modules(module {
-                single<RandomApi> { MockRandomApi() }
+                single<IRandomApiClient> { MockRandomApi() }
                 single { RandomRepository() }
             })
         }
@@ -47,6 +47,33 @@ class RandomRepositoryUnitTest : KoinTest {
         runBlocking {
             val result = randomRepository.rollDice(0)
             val expected = ERROR_VALUE
+            assertEquals(expected, result)
+        }
+    }
+
+    @Test
+    fun `test generateRandomInteger with valid num, lowerBound and upperBound`() {
+        runBlocking {
+            val result = randomRepository.generateRandomInteger(1, 1, 10)
+            val expected = listOf(5)
+            assertEquals(expected, result)
+        }
+    }
+
+    @Test
+    fun `test generateRandomInteger with invalid num`() {
+        runBlocking {
+            val result = randomRepository.generateRandomInteger(0, 1, 10)
+            val expected = listOf<Int>()
+            assertEquals(expected, result)
+        }
+    }
+
+    @Test
+    fun `test generateRandomInteger with invalid lowerBound and upperBound`() {
+        runBlocking {
+            val result = randomRepository.generateRandomInteger(1, 10, 1)
+            val expected = listOf<Int>()
             assertEquals(expected, result)
         }
     }
