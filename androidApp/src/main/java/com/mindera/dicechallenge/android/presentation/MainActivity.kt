@@ -11,14 +11,13 @@ import com.mindera.dicechallenge.android.R
 import com.mindera.dicechallenge.android.databinding.ActivityMainBinding
 import com.mindera.dicechallenge.repository.RandomRepository
 import kotlinx.coroutines.flow.collect
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private val FIELD_ITEMS = listOf("4", "6", "8", "10", "12", "20", "100")
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: MainViewModel by viewModels {
-        MainViewModelFactory(RandomRepository()) // TODO: Apply DI
-    }
+    private val viewModel: MainViewModel by viewModel()
 
     private lateinit var binding: ActivityMainBinding
 

@@ -30,14 +30,3 @@ class MainViewModel(private val repository: IRandomRepository) : ViewModel() {
     //fun rollDice(numFaces: Int): Int = DiceManager().rollDice(numFaces)
 
 }
-
-class MainViewModelFactory(private val repository: IRandomRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return MainViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-
-}
