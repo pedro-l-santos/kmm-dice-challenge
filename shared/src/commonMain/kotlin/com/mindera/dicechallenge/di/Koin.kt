@@ -1,5 +1,6 @@
 package com.mindera.dicechallenge.di
 
+import com.mindera.dicechallenge.api.Engine
 import com.mindera.dicechallenge.api.IRandomApiClient
 import com.mindera.dicechallenge.api.RandomApiClient
 import com.mindera.dicechallenge.repository.IRandomRepository

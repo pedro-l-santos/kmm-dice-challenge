@@ -37,6 +37,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
                 implementation("io.insert-koin:koin-test:$koinVersion")
+                implementation("io.ktor:ktor-client-mock:$ktorVersion")
             }
         }
         val androidMain by getting{
