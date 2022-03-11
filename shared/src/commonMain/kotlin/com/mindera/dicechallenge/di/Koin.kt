@@ -4,6 +4,7 @@ import com.mindera.dicechallenge.api.IRandomApiClient
 import com.mindera.dicechallenge.api.RandomApiClient
 import com.mindera.dicechallenge.repository.IRandomRepository
 import com.mindera.dicechallenge.repository.RandomRepository
+import io.ktor.client.engine.*
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
@@ -18,6 +19,7 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
 fun initKoin() = initKoin {}
 
 val commonModule = module {
+    single { Engine().engine }
+    single<IRandomApiClient> { RandomApiClient(get()) }
     single<IRandomRepository> { RandomRepository() }
-    single<IRandomApiClient> { RandomApiClient() }
 }
