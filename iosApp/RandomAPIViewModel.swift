@@ -23,8 +23,8 @@ final class RandomAPIViewModel: ObservableObject {
     func generateValues(){
         if let unwrappedNum = Int32(num), let unwrappedLower = Int32(lowerBound), let unwrappedUpperBound = Int32(upperBound) {
             kmmRandomRepo.generateRandomInteger(num: unwrappedNum, lowerBound: unwrappedLower, upperBound: unwrappedUpperBound){value,_ in
-                if let value = value {
-                    self.resultList = value.map{Int(truncating: $0)}
+                if let valueUnwrapped = value, valueUnwrapped.count != 0{
+                    self.resultList = valueUnwrapped.map{Int(truncating: $0)}
                 }
             }
         }

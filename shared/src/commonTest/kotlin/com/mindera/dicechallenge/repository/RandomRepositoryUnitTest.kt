@@ -13,6 +13,10 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
+private const val NUM_LOWER_LIMIT = 1
+private const val NUM_UPPER_LIMIT = 10000
+private const val BOUNDS_LIMIT = 1000000000
+
 @Suppress("IllegalIdentifier")
 class RandomRepositoryUnitTest : KoinTest {
 
@@ -54,16 +58,25 @@ class RandomRepositoryUnitTest : KoinTest {
     @Test
     fun `test generateRandomInteger with valid num, lowerBound and upperBound`() {
         runBlocking {
-            val result = randomRepository.generateRandomInteger(1, 1, 10)
+            val result = randomRepository.generateRandomInteger(NUM_LOWER_LIMIT, 1, 10)
             val expected = listOf(5)
             assertEquals(expected, result)
         }
     }
 
     @Test
-    fun `test generateRandomInteger with invalid num`() {
+    fun `test generateRandomInteger with invalid num less than range`() {
         runBlocking {
-            val result = randomRepository.generateRandomInteger(0, 1, 10)
+            val result = randomRepository.generateRandomInteger(NUM_LOWER_LIMIT - 1, 1, 10)
+            val expected = listOf<Int>()
+            assertEquals(expected, result)
+        }
+    }
+
+    @Test
+    fun `test generateRandomInteger with invalid num more than range`() {
+        runBlocking {
+            val result = randomRepository.generateRandomInteger(NUM_UPPER_LIMIT + 1, 1, 10)
             val expected = listOf<Int>()
             assertEquals(expected, result)
         }
@@ -73,6 +86,42 @@ class RandomRepositoryUnitTest : KoinTest {
     fun `test generateRandomInteger with invalid lowerBound and upperBound`() {
         runBlocking {
             val result = randomRepository.generateRandomInteger(1, 10, 1)
+            val expected = listOf<Int>()
+            assertEquals(expected, result)
+        }
+    }
+
+    @Test
+    fun `test generateRandomInteger with invalid lowerBound more than range`() {
+        runBlocking {
+            val result = randomRepository.generateRandomInteger(1, BOUNDS_LIMIT + 1, 10)
+            val expected = listOf<Int>()
+            assertEquals(expected, result)
+        }
+    }
+
+    @Test
+    fun `test generateRandomInteger with invalid lowerBound less than range`() {
+        runBlocking {
+            val result = randomRepository.generateRandomInteger(1, -BOUNDS_LIMIT - 1, 1)
+            val expected = listOf<Int>()
+            assertEquals(expected, result)
+        }
+    }
+
+    @Test
+    fun `test generateRandomInteger with invalid upperBound more than range`() {
+        runBlocking {
+            val result = randomRepository.generateRandomInteger(1, 1, BOUNDS_LIMIT + 1)
+            val expected = listOf<Int>()
+            assertEquals(expected, result)
+        }
+    }
+
+    @Test
+    fun `test generateRandomInteger with invalid upperBound less than range`() {
+        runBlocking {
+            val result = randomRepository.generateRandomInteger(1, 1, -BOUNDS_LIMIT - 1)
             val expected = listOf<Int>()
             assertEquals(expected, result)
         }
